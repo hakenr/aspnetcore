@@ -4,7 +4,7 @@
     <DerivedInputTextComponent @bind-Value="@model.TextValue" id="derived-input-text" />
     <DerivedInputTextareaComponent @bind-Value="@model.TextValue" id="derived-input-textarea" />
     <DerivedInputDateComponent @bind-Value="@model.DateValue" id="derived-input-date" />
-    <DerivedInputNumberComponent @bind-Value="@model.IntValue" id="derived-input-number" />
+    <InputNumber @bind-Value="@model.IntValue" id="derived-input-number" />
     <DerivedInputCheckboxComponent @bind-Value="@model.BoolValue" id="derived-input-checkbox" />
     <DerivedInputRadioGroupComponent @bind-Value="@model.RadioValue">
         <InputRadio Value="@DayOfWeek.Saturday" id="input-radio-sunday" />
@@ -31,7 +31,24 @@
     {
         public string TextValue { get; set; }
         public DateTime? DateValue { get; set; }
-        public int? IntValue { get; set; }
+
+        public int? IntValue
+        {
+            get => _intValue;
+            set
+            {
+                if (value == 1)
+                {
+                    _intValue = 0;
+                }
+                else
+                {
+                    _intValue = value;
+                }
+            }
+        }
+        private int? _intValue;
+
         public bool BoolValue { get; set; }
         public DayOfWeek RadioValue { get; set; } = DayOfWeek.Monday;
         public DayOfWeek SelectValue { get; set; } = DayOfWeek.Monday;
